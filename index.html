@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>task7</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    .darkmode {
+      --primary-bg: #161722;
+      --surface-bg: #25273c;
+      --primary-text: #e4e5f1;
+      --secondary-text: #5c5f7f;
+      --completed-text: #4d5066;
+      --primary-border: #4d5066;
+    }
+  </style>
+  <body>
+    <main>
+      <h2>Welcome!</h2>
+      <form action="">
+        <input type="text" id="input" placeholder="Enter your name..." />
+      </form>
+      <h3>Hello, friend!</h3>
+      <div id="moodBox"></div>
+      <div class="btn-container">
+        <button class="btn" id="growBtn">Grow</button>
+        <button class="btn" id="shrinkBtn">Shrink</button>
+      </div>
+
+      <button class="btn" id="toggleModeBtn">Toggle Mode</button>
+
+      <button class="btn" id="secretBtn">Show Secret</button>
+      <div id="msg">
+        <p id="secretMsg">THANKS FOR THE OPPORTUNITY🙌</p>
+      </div>
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
