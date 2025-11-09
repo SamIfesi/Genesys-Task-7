@@ -11,17 +11,30 @@ const growBtn = document.getElementById("growBtn");
 const shrinkBtn = document.getElementById("shrinkBtn");
 const secretMsg = document.getElementById("secretMsg");
 const msg = document.getElementById("msg");
-console.log(btnContainer);
+const secretBtn = document.getElementById("secretBtn");
+const toggleModeBtn = document.getElementById("toggleModeBtn");
 
-// Set CSS Variables
+// SET FOR LIGHT MODE VARIBLES
 const root = document.documentElement;
-root.style.setProperty("--primary-bg", "#fafafa");
-root.style.setProperty("--surface-bg", "#fafafa");
-root.style.setProperty("--primary-text", "#484b6a");
-root.style.setProperty("--secondary-text", "#9394a5");
-root.style.setProperty("--completed-text", "#d2d3db");
-root.style.setProperty("--primary-border", "#cacde8");
-root.style.setProperty("--active-text", "#3a7bfd");
+const lightTheme = {
+  "--primary-bg": "#fafafa",
+  "--surface-bg": "#fafafa",
+  "--primary-text": "#484b6a",
+  "--secondary-text": "#9394a5",
+  "--completed-text": "#d2d3db",
+  "--primary-border": "#cacde8",
+  "--active-text": "#3a7bfd"
+};
+// SET CSS DARK MODE VARIBLES
+const darkTheme = {
+  "--primary-bg": "#161722",
+  "--surface-bg": "#25273c",
+  "--primary-text": "#e4e5f1",
+  "--secondary-text": "#5c5f7f",
+  "--completed-text": "#4d5066",
+  "--primary-border": "#4d5066",
+  "--active-text": "#3a7bfd"
+};
 
 body.style.backgroundColor = "var(--primary-bg)";
 body.style.display = "flex";
@@ -129,7 +142,7 @@ msg.style.justifyContent = "center";
 msg.style.width = "100%";
 
 secretMsg.style.backgroundColor = "var(--secondary-text)";
-secretMsg.style.color = "var(--surface-bg)";
+secretMsg.style.color = "#fafafa";
 secretMsg.style.padding = "1rem";
 secretMsg.style.borderRadius = ".5rem";
 secretMsg.style.boxShadow = "0 .25rem .5rem rgba(0, 0, 0, 0.1)";
@@ -138,7 +151,7 @@ secretMsg.style.opacity = "0";
 secretMsg.style.zIndex = "10";
 secretMsg.style.transition = "all 0.5s ease";
 
-const secretBtn = document.getElementById("secretBtn");
+// SECRET MESSAGE TOGGLE FUNCTION
 secretBtn.addEventListener("click", () => {
   if (secretMsg.style.opacity === "0") {
     secretMsg.style.transform = "translateY(0)";
@@ -155,23 +168,42 @@ secretBtn.addEventListener("click", () => {
   }
 });
 
-const toggleModeBtn = document.getElementById("toggleModeBtn");
+// TOGGLE FOR LIGHT MODE AND DARK MODE
+function applyTheme(theme) {
+  for (const key in theme) {
+    root.style.setProperty(key, theme[key]);
+  }
+}
 
-if (localStorage.getItem("key") === "dark") {
-  document.body.classList.add("darkmode");
+const saveTheme = localStorage.getItem("key");
+if (saveTheme === "dark") {
+  applyTheme(darkTheme);
+  document.body.dataset.key = "dark";
   toggleModeBtn.innerText = "Light Mode";
 } else {
+  applyTheme(lightTheme);
+  document.body.dataset.key = "light";
   toggleModeBtn.innerText = "Dark Mode";
 }
+// if (localStorage.getItem("key") === "dark") {
+//   document.body.classList.add("darkmode");
+//   toggleModeBtn.innerText = "Light Mode";
+// } else {
+//   toggleModeBtn.innerText = "Dark Mode";
+// }
 
 toggleModeBtn.addEventListener("click", () => {
   document.body.classList.toggle("darkmode");
 
-  if (document.body.classList.contains("darkmode")) {
-    localStorage.setItem("key", "dark");
-    toggleModeBtn.innerText = "Light Mode";
-  } else {
-    localStorage.setItem("key", "light");
+  if (document.body.dataset.theme === "dark") {
+    applyTheme(lightTheme);
+    document.body.dataset.theme = "light";
     toggleModeBtn.innerText = "Dark Mode";
+    localStorage.setItem("key", "light");
+  } else {
+    applyTheme(darkTheme);
+    document.body.dataset.theme = "dark";
+    toggleModeBtn.innerText = "Light Mode";
+    localStorage.setItem("key", "dark");
   }
 });
