@@ -13,6 +13,8 @@ const secretMsg = document.getElementById("secretMsg");
 const msg = document.getElementById("msg");
 const secretBtn = document.getElementById("secretBtn");
 const toggleModeBtn = document.getElementById("toggleModeBtn");
+const quest = document.getElementById("quest");
+const answer = document.getElementById("answer");
 
 // SET FOR LIGHT MODE VARIBLES
 const root = document.documentElement;
@@ -23,7 +25,7 @@ const lightTheme = {
   "--secondary-text": "#9394a5",
   "--completed-text": "#d2d3db",
   "--primary-border": "#cacde8",
-  "--active-text": "#3a7bfd"
+  "--active-text": "#3a7bfd",
 };
 // SET CSS DARK MODE VARIBLES
 const darkTheme = {
@@ -33,7 +35,7 @@ const darkTheme = {
   "--secondary-text": "#5c5f7f",
   "--completed-text": "#4d5066",
   "--primary-border": "#4d5066",
-  "--active-text": "#3a7bfd"
+  "--active-text": "#3a7bfd",
 };
 
 body.style.backgroundColor = "var(--primary-bg)";
@@ -207,3 +209,13 @@ toggleModeBtn.addEventListener("click", () => {
     localStorage.setItem("key", "dark");
   }
 });
+
+quest.style.color = "var(--primary-text)";
+quest.style.textAlign = "center";
+quest.style.marginBottom = ".5rem";
+answer.style.color = "var(--secondary-text)";
+answer.style.fontStyle = "italic";
+answer.style.fontSize = ".8rem"
+
+answer.innerText =
+  "innerHTML is used when you need to work with the full HTML structure: of an element, including tags and formatting. While the use of innerText is when you only need to retrieve or set the visible, human-readable text content: of an element, without any HTML formatting.";
